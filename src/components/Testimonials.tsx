@@ -41,7 +41,8 @@ export function Testimonials() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      next()
+      setDirection(1)
+      setCurrent((prev) => (prev + 1) % testimonials.length)
     }, 8000)
     return () => clearInterval(timer)
   }, [])
