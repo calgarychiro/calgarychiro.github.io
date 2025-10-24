@@ -4,12 +4,12 @@ import { List, X } from '@phosphor-icons/react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Conditions', href: '#conditions' },
-  { label: 'Services', href: '#services' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'HOME', href: '#home' },
+  { label: 'ABOUT', href: '#about' },
+  { label: 'CONDITIONS TREATED', href: '#conditions' },
+  { label: 'SERVICES', href: '#services' },
+  { label: 'BLOG', href: '#blog' },
+  { label: 'CONTACT', href: '#contact' },
 ]
 
 export function Navigation() {
