@@ -14,7 +14,7 @@ export function Hero() {
         className="relative z-20 text-center px-4 max-w-4xl mx-auto"
       >
         <div className="mb-6 text-primary-foreground/90 text-sm md:text-base tracking-widest font-light">
-          堂 LOCAL CALGARY CHIROPRACTOR 坐
+          LOCAL CALGARY CHIROPRACTOR
         </div>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 tracking-tight">
           Michael Lau Chiropractic
