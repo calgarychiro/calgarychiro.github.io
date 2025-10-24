@@ -26,6 +26,7 @@ export function BlogAdmin({ open, onOpenChange }: BlogAdminProps) {
     content: '',
     author: '',
     tags: '',
+    imageUrl: '',
   })
 
   const resetForm = () => {
@@ -35,6 +36,7 @@ export function BlogAdmin({ open, onOpenChange }: BlogAdminProps) {
       content: '',
       author: '',
       tags: '',
+      imageUrl: '',
     })
     setEditingPost(null)
     setShowEditor(false)
@@ -48,6 +50,7 @@ export function BlogAdmin({ open, onOpenChange }: BlogAdminProps) {
       content: post.content,
       author: post.author,
       tags: post.tags.join(', '),
+      imageUrl: post.imageUrl || '',
     })
     setShowEditor(true)
   }
@@ -68,6 +71,7 @@ export function BlogAdmin({ open, onOpenChange }: BlogAdminProps) {
       author: formData.author,
       date: editingPost?.date || new Date().toISOString(),
       tags: formData.tags.split(',').map((t) => t.trim()).filter(Boolean),
+      imageUrl: formData.imageUrl || undefined,
     }
 
     if (editingPost) {
@@ -170,6 +174,17 @@ export function BlogAdmin({ open, onOpenChange }: BlogAdminProps) {
                 value={formData.author}
                 onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                 required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="imageUrl">Image URL (optional)</Label>
+              <Input
+                id="imageUrl"
+                type="url"
+                value={formData.imageUrl}
+                onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                placeholder="https://example.com/image.jpg"
               />
             </div>
 

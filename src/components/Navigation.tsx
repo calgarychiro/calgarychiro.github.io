@@ -12,14 +12,37 @@ const navItems = [
   { label: 'CONTACT', href: '#contact' },
 ]
 
-export function Navigation() {
+interface NavigationProps {
+  onNavigate?: (page: 'home' | 'blog-navigator') => void
+  currentPage?: 'home' | 'blog-navigator'
+}
+
+export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsOpen(false)
+    if (currentPage !== 'home' && onNavigate) {
+      onNavigate('home')
+      setTimeout(() => {
+        const element = document.querySelector(href)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    } else {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    setIsOpen(false)
+  }
+
+  const handleBlogClick = () => {
+    if (onNavigate) {
+      onNavigate('blog-navigator')
+    } else {
+      scrollToSection('#blog')
     }
   }
 
@@ -38,7 +61,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <button
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => item.href === '#blog' ? handleBlogClick() : scrollToSection(item.href)}
                 className="text-sm font-medium text-foreground hover:text-accent transition-colors relative group"
               >
                 {item.label}
@@ -58,7 +81,7 @@ export function Navigation() {
                 {navItems.map((item) => (
                   <button
                     key={item.href}
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={() => item.href === '#blog' ? handleBlogClick() : scrollToSection(item.href)}
                     className="text-lg font-medium text-foreground hover:text-accent transition-colors text-left"
                   >
                     {item.label}

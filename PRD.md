@@ -48,18 +48,18 @@ A professional chiropractor website for Michael Lau that combines modern eleganc
 - **Success criteria**: Responsive grid, smooth lightbox transitions, accessible navigation
 
 ### Blog Integration Section
-- **Functionality**: Display latest blog posts with integration options (headless CMS or markdown-based)
+- **Functionality**: Display latest 3 blog posts on homepage with "View All Posts" button; dedicated blog navigator page showing all posts in a grid with images
 - **Purpose**: Educational content for SEO, patient education, and authority building
-- **Trigger**: Scroll to blog section
-- **Progression**: User scrolls → sees latest blog posts → clicks post → reads content in modal or inline → navigates back
-- **Success criteria**: Fast loading, clear post previews, easy content updates
+- **Trigger**: Scroll to blog section on homepage, or click "BLOG" in navigation to view full blog page
+- **Progression**: User scrolls → sees latest 3 blog posts → clicks "View All Posts" or navigation link → sees dedicated blog page with all posts in grid layout → clicks post → reads content in modal → navigates back
+- **Success criteria**: Fast loading, clear post previews with images, easy content updates via admin interface
 
 **Blog CMS Options**:
-- **Option 1: JSON-based (simplest)** - Store blog posts as JSON objects in KV store, manage via admin UI
-- **Option 2: Markdown-based (self-hosted)** - Store markdown files that can be edited locally and deployed with the site
-- **Option 3: Headless CMS Integration** - Connect to services like Contentful, Sanity, or Strapi (requires API integration)
-
-For this implementation, I'll create a **JSON-based blog system with an admin interface** that allows easy content management while remaining self-hosted within the Spark environment.
+- **Implemented: JSON-based with Admin UI** - Blog posts stored as JSON objects in KV store with title, excerpt, content, author, date, tags, and optional image URL. Managed via admin interface accessible from both homepage and blog navigator page.
+- Blog posts display in grid layout (1 column mobile, 2 tablet, 3 desktop)
+- Each post card shows image (or gradient fallback), author, date, and title
+- Image hover effects with subtle scale transform
+- Clicking any post opens full content in modal dialog
 
 ### Contact Information & Hours
 - **Functionality**: Address, phone numbers, business hours in organized layout with prominent booking CTA

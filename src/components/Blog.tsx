@@ -15,14 +15,20 @@ export interface BlogPost {
   author: string
   date: string
   tags: string[]
+  imageUrl?: string
 }
 
-export function Blog() {
+interface BlogProps {
+  onNavigateToBlogPage?: () => void
+}
+
+export function Blog({ onNavigateToBlogPage }: BlogProps) {
   const [posts] = useKV<BlogPost[]>('blog-posts', [])
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
   const [showAdmin, setShowAdmin] = useState(false)
 
   const blogPosts = posts || []
+  const displayPosts = blogPosts.slice(0, 3)
 
   return (
     <section id="blog" className="py-16 md:py-24 bg-background">
@@ -51,35 +57,44 @@ export function Blog() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {blogPosts.map((post) => (
-              <Card
-                key={post.id}
-                className="shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                onClick={() => setSelectedPost(post)}
-              >
-                <CardHeader>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    <CalendarBlank size={16} />
-                    {new Date(post.date).toLocaleDateString()}
-                  </div>
-                  <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-                  <CardDescription className="line-clamp-3">
-                    {post.excerpt}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {displayPosts.map((post) => (
+                <Card
+                  key={post.id}
+                  className="shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                  onClick={() => setSelectedPost(post)}
+                >
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                      <CalendarBlank size={16} />
+                      {new Date(post.date).toLocaleDateString()}
+                    </div>
+                    <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+                    <CardDescription className="line-clamp-3">
+                      {post.excerpt}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            {blogPosts.length > 3 && onNavigateToBlogPage && (
+              <div className="text-center mt-12">
+                <Button variant="outline" size="lg" onClick={onNavigateToBlogPage}>
+                  View All Posts
+                </Button>
+              </div>
+            )}
+          </>
         )}
 
         <Dialog open={selectedPost !== null} onOpenChange={() => setSelectedPost(null)}>
