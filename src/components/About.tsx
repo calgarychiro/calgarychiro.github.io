@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card'
+import headshotImage from '/data/michael/Headshots+with+White+Coat+(1+of+3).webp'
 
 export function About() {
   const educationItems = [
@@ -54,9 +55,11 @@ export function About() {
           <div className="grid md:grid-cols-[300px,1fr] gap-8 md:gap-12 mb-12">
             <div className="flex justify-center md:justify-start">
               <div className="w-full max-w-[300px] aspect-square bg-muted rounded-lg overflow-hidden shadow-lg">
-                <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                  <span className="text-6xl font-light">ML</span>
-                </div>
+                <img 
+                  src={headshotImage} 
+                  alt="Dr. Michael Lau" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             
