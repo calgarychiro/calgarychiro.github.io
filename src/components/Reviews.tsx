@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
-import { CaretLeft, CaretRight } from '@phosphor-icons/
+import { motion, AnimatePresence } from 'framer-motion'
+import { CaretLeft, CaretRight } from '@phosphor-icons/react'
+import { Button } from '@/components/ui/button'
 
-import review002 from '/data/reviews/022_Screen
-
+import review002 from '/data/reviews/022_Screen+Shot+2020-10-14+at+12.10.01+PM.png.webp'
+import review004 from '/data/reviews/024_Screen+Shot+2020-10-14+at+12.07.22+PM.png.webp'
 import review006 from '/data/reviews/030_Screen+Shot+2020-10-14+at+12.07.08+PM.png.webp'
 import review008 from '/data/reviews/032_Screen+Shot+2020-10-14+at+12.10.31+PM.png.webp'
 import review010 from '/data/reviews/034_Screen+Shot+2020-10-14+at+12.05.49+PM.png.webp'
 import review012 from '/data/reviews/036_Screen+Shot+2020-05-05+at+1.56.48+PM.png.webp'
+import review014 from '/data/reviews/039_Screen+Shot+2020-05-05+at+1.56.44+PM.png.webp'
+import review016 from '/data/reviews/042_Screen+Shot+2020-10-14+at+12.06.01+PM.png.webp'
+
 const reviewImages = [
   { url: review002, alt: 'Patient Review 2' },
   { url: review004, alt: 'Patient Review 4' },
@@ -14,30 +19,17 @@ const reviewImages = [
   { url: review008, alt: 'Patient Review 8' },
   { url: review010, alt: 'Patient Review 10' },
   { url: review012, alt: 'Patient Review 12' },
+  { url: review014, alt: 'Patient Review 14' },
+  { url: review016, alt: 'Patient Review 16' },
+]
 
+export function Reviews() {
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
-      setCurrentSlide((prev) => (prev + 1) % r
-
-  }, [])
-  const nextSlide = () => {
-  }
-  const prevSlide = () => {
-  }
-  return (
-      <div className="container mx-auto px-4 m
-        <p className="text-center text-muted-fo
-        </p>
-        <div className="max-w-4xl mx-auto">
- 
-
-                animate={{ 
-                transition={{ duration: 0.5 }}
-
-                  s
-                  className="w-full h
-              </motion.div>
-
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % reviewImages.length)
+    }, 5000)
 
     return () => clearInterval(timer)
   }, [])
@@ -80,55 +72,35 @@ const reviewImages = [
             <Button
               variant="ghost"
               size="icon"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background/90 rounded-full"
+              onClick={prevSlide}
+            >
+              <CaretLeft className="h-6 w-6" />
+            </Button>
 
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background/90 rounded-full"
+              onClick={nextSlide}
+            >
+              <CaretRight className="h-6 w-6" />
+            </Button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {reviewImages.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentSlide ? 'bg-primary w-8' : 'bg-background/60'
+                  }`}
+                  onClick={() => setCurrentSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
