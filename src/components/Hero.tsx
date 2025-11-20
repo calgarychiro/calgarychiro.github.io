@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/90 to-primary/70 z-10" />
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600')] bg-cover bg-center" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1661758268877-86a787e7afa8?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center" />
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
