@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { List, X } from '@phosphor-icons/react'
+import { List } from '@phosphor-icons/react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const navItems = [
@@ -12,38 +12,15 @@ const navItems = [
   { label: 'CONTACT', href: '#contact' },
 ]
 
-interface NavigationProps {
-  onNavigate?: (page: 'home' | 'blog-navigator') => void
-  currentPage?: 'home' | 'blog-navigator'
-}
-
-export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps) {
+export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   const scrollToSection = (href: string) => {
-    if (currentPage !== 'home' && onNavigate) {
-      onNavigate('home')
-      setTimeout(() => {
-        const element = document.querySelector(href)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
-    } else {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
     }
     setIsOpen(false)
-  }
-
-  const handleBlogClick = () => {
-    if (onNavigate) {
-      onNavigate('blog-navigator')
-    } else {
-      scrollToSection('#blog')
-    }
   }
 
   return (
@@ -61,27 +38,39 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             {navItems.map((item) => (
               <button
                 key={item.href}
-                onClick={() => item.href === '#blog' ? handleBlogClick() : scrollToSection(item.href)}
+                onClick={() => scrollToSection(item.href)}
                 className="text-sm font-medium text-foreground hover:text-accent transition-colors relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
               </button>
             ))}
+            <Button asChild>
+              <a href="https://nwcalgarychiro.janeapp.com/#/staff_member/7" target="_blank" rel="noopener noreferrer">
+                Book Online
+              </a>
+            </Button>
           </div>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <List className="h-6 w-6" />
+            <div className="flex items-center gap-4 md:hidden">
+              <Button asChild size="sm">
+                <a href="https://nwcalgarychiro.janeapp.com/#/staff_member/7" target="_blank" rel="noopener noreferrer">
+                  Book Online
+                </a>
               </Button>
-            </SheetTrigger>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <List className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+            </div>
             <SheetContent side="right" className="w-[300px]">
               <div className="flex flex-col gap-6 mt-8">
                 {navItems.map((item) => (
                   <button
                     key={item.href}
-                    onClick={() => item.href === '#blog' ? handleBlogClick() : scrollToSection(item.href)}
+                    onClick={() => scrollToSection(item.href)}
                     className="text-lg font-medium text-foreground hover:text-accent transition-colors text-left"
                   >
                     {item.label}
