@@ -58,8 +58,14 @@ export function Contact() {
                 </div>
               </div>
 
-              <Button className="w-full mt-8 bg-accent hover:bg-accent/90" size="lg">
-                Book Online
+              <Button className="w-full mt-8 bg-accent hover:bg-accent/90" size="lg" asChild>
+                <a
+                  href="https://nwcalgarychiro.janeapp.com/#/staff_member/7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book Online
+                </a>
               </Button>
             </CardContent>
           </Card>

@@ -1,11 +1,15 @@
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
+import heroBg from '../assets/hero-bg.png'
 
 export function Hero() {
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/90 to-primary/70 z-10" />
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600')] bg-cover bg-center" />
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -25,8 +29,15 @@ export function Hero() {
         <Button
           size="lg"
           className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
+          asChild
         >
-          Book Online
+          <a
+            href="https://nwcalgarychiro.janeapp.com/#/staff_member/7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book Online
+          </a>
         </Button>
       </motion.div>
     </section>
